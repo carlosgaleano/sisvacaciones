@@ -40,7 +40,7 @@ class HomeController extends Controller
             $result=null;
         }
        
-
+print_r(auth()->user()->role_id);
 
         return view('home')->with('workers',$wokersr->get())
                            ->with('result',$result);
