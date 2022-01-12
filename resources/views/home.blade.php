@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+{{$result}}
 @section('content')
 <div class="container">
     <div class="row">
@@ -19,7 +19,7 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th class="success" style="text-align:center" colspan="3">Dias Vacaciones</th>
+                                <th class="success" style="text-align:center" colspan="4">Dias Vacaciones</th>
                                 <th></th>
                             </tr>
                             <tr>
@@ -30,6 +30,7 @@
                                 <th>Area</th>
                                 <th>Puesto</th>
                                 <th class="success">Ganados</th>
+                                <th class="success">Acumulados</th>
                                 <th class="success">Tomados</th>
                                 <th class="success">Restantes</th>
                                 <th>Opciones</th>
@@ -45,6 +46,7 @@
                                 <td>{{$worker->area->name}}</td>
                                 <td>{{$worker->position}}</td>
                                 <td class="success">{{$vacationDays=MyHelper::vacationDays($worker->date_in)}}</td>
+                                <td class="success">{{$result}}</td>
                                 <td class="success">{{$vacationTaken=MyHelper::vacationTaken($worker->id)}}</td>
                                 <td class="success">{{$vacationDays-$vacationTaken}}</td>
                                 <td>

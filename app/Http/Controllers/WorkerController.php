@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Area;
+use App\User;
 use App\Worker;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,9 @@ class WorkerController extends Controller
     public function create()
     {
         $areas = Area::lists('name','id')->toArray();
-        return view('worker.create')->with('areas',$areas);
+        $user = User::where('role_id',2)->lists('name', 'id')->toarray();
+        return view('worker.create')->with('areas',$areas)
+                                    ->with('user',$user);
     }
 
     public function store(Request $request)
@@ -41,9 +44,11 @@ class WorkerController extends Controller
             'date_in' => 'required',
             'position' => 'required',
             'email' => 'required',
-            'area_id' => 'required'
+            'area_id' => 'required',
+            'user_id'=>'required'
         ]);
-
+    
+      
         $worker = new Worker();
         $worker->name = $request['name'];
         $worker->ci = $request['ci'];
@@ -55,6 +60,8 @@ class WorkerController extends Controller
         $worker->email = $request['email'];
         $worker->state = '1';
         $worker->area_id = $request['area_id'];
+        $worker->user_id = $request['user_id'];
+
         $worker->save();
 
         return redirect('/home');
@@ -145,5 +152,10 @@ class WorkerController extends Controller
 
     public function state(){
         return 'hola';
+    }
+
+    public function infoVacation(){
+        return view('worker.infoVacation');
+
     }
 }

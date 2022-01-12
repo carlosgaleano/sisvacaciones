@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Worker;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Controllers\VacationController;
+
 
 class HomeController extends Controller
 {
@@ -25,9 +27,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $workers = Worker::where('state',1);
+        $wokersr = Worker::where('state',1);
+        $datos=$wokersr->get()->toArray();
+        //print_r($datos[0]['date_in']);
+        //dd($datos);
+        
+    
+        $vacaciones= new VacationController;
+       if($datos){
+            $result=$vacaciones->calcular_dias($datos[0]['date_in']);
+        }else{
+            $result=null;
+        }
+       
 
-        return view('home')->with('workers',$workers->get());
+
+        return view('home')->with('workers',$wokersr->get())
+                           ->with('result',$result);
     }
 
     public function welcome(){

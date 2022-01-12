@@ -124,6 +124,19 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('area_id') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Usuario perfil Empleado:</label>
+
+                                <div class="col-md-6">
+                                    {!! Form::select('user_id',['' => 'Seleccione un Usuario...']+$user,null, array('class' => 'form-control')) !!}
+
+                                    @if ($errors->has('user_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('user_id') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group{{ $errors->has('position') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Cargo:</label>

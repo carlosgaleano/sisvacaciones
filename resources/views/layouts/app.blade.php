@@ -30,13 +30,15 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Sisvacaciones
+                    Sistema de tracking
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                @if (!Auth::guest())
+                 {{Auth::user()}}
+
+                @if (!Auth::guest() && Auth::user()->rol == 'admin')
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Empleados <span class="caret"></span></a>
@@ -54,6 +56,20 @@
                         </ul>
                     </li>
                 </ul>
+                @endif
+                @if (!Auth::guest() && Auth::user()->rol == 'normal')
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Solicitud de Vacaciones <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                           
+                            <li><a href="{{ url('/home') }}">Listar Empleados Activos</a></li>
+                          
+                        </ul>
+                    </li>
+                  
+                </ul>
+
                 @endif
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">

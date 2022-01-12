@@ -41,6 +41,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/worker/update', 'WorkerController@update');
     Route::get('/worker/retirados', 'WorkerController@retirados');
     Route::post('/worker/remove', 'WorkerController@remove');
+    Route::get('/worker/infoVacation/', 'WorkerController@infoVacation');
+
 
     Route::get('/area', 'AreaController@index');
     Route::get('/area/create', 'AreaController@create');

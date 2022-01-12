@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+use DateTime;
 
 class VacationController extends Controller
 {
@@ -35,6 +36,31 @@ class VacationController extends Controller
         }
         return view('vacation.create')->with('id_worker',$decrypted_id)->with('name_worker',$decrypted_name);
     }
+
+    
+     public function calcular_dias($inicio){
+
+        //$inicio="2014-01-01 00:00:00";
+        $fin=date('Y-m-d H:i:s');
+         
+        $datetime1=new DateTime($inicio);
+        $datetime2=new DateTime($fin);
+         
+        # obtenemos la diferencia entre las dos fechas
+        $interval=$datetime2->diff($datetime1);
+         
+        # obtenemos la diferencia en meses
+        $intervalMeses=$interval->format("%m");
+        # obtenemos la diferencia en años y la multiplicamos por 12 para tener los meses
+        $intervalAnos = $interval->format("%y")*12;
+        
+        $dias=($intervalMeses+$intervalAnos)*1.25;
+        return $dias;
+        
+
+
+
+     }
 
     public function store(Request $request)
     {
