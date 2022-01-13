@@ -40,10 +40,20 @@ class HomeController extends Controller
             $result=null;
         }
        
-print_r(auth()->user()->role_id);
+//print_r(auth()->user()->role_id);
 
-        return view('home')->with('workers',$wokersr->get())
+       
+      $role_id=auth()->user()->role_id;
+
+      if($role_id==2){
+
+        return redirect('/worker/infoVacation/');
+       //dd return view('/worker/infoVacation/',compact('result'));
+      }else{
+          return view('home')->with('workers',$wokersr->get())
                            ->with('result',$result);
+      }
+        
     }
 
     public function welcome(){

@@ -1,9 +1,9 @@
 @extends('layouts.app')
-
+{{$workers}}
 @section('content')
 <div class="container">
 <div class="panel panel-default">
-  <div class="panel-body">Vacaciones</div>
+  <div class="panel-body">Vacaciones Fecha de Ingreso: {{$workers->date_in}} </div>
   <div class="panel-footer">
 
   <table class="table">
@@ -17,15 +17,15 @@
   <tbody>
     <tr>
       <th scope="row">(+) Acumuladas</th>
-      <td>30</td>
+      <td>{{$result}}</td>
     </tr>
     <tr>
       <th scope="row">(-) Tomadas</th>
-      <td>30</td>
+      <td>0</td>
     </tr>
     <tr>
       <th scope="row">(=) Totales</th>
-      <td>30</td>
+      <td>{{$result}}</td>
     </tr>
    
   </tbody>
@@ -41,29 +41,19 @@
   <thead>
     <tr>
       <th scope="col">inicio</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">fin</th>
+      <th scope="col">dias</th>
+      <th scope="col">Estado</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row"></th>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+   
   </tbody>
 </table>
 

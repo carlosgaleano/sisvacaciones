@@ -6,6 +6,7 @@ use App\Area;
 use App\User;
 use App\Worker;
 use Illuminate\Http\Request;
+use App\Http\Controllers\VacationController;
 
 use App\Http\Requests;
 
@@ -155,7 +156,21 @@ class WorkerController extends Controller
     }
 
     public function infoVacation(){
-        return view('worker.infoVacation');
+
+        $id=auth()->user()->id;
+        //dd( $id);
+        $worker = Worker::where('user_id','=',$id)->first();
+        $datos=$worker->toArray();
+    
+        $vacaciones= new VacationController;
+        if($datos){
+            $result=$vacaciones->calcular_dias($datos['date_in']);
+         }else{
+             $result=null;
+         }
+        return view('worker.infoVacation')
+              ->with('workers',$worker)
+              ->with('result',$result);
 
     }
 }
