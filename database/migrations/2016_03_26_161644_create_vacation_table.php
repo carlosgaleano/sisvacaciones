@@ -19,6 +19,7 @@ class CreateVacationTable extends Migration
             $table->string('observations');
             $table->string('type');
             $table->date('date_init');
+            $table->date('date_end');
             $table->integer('worker_id')->unsigned();
             $table->foreign('worker_id')->references('id')->on('workers');
             $table->timestamps();

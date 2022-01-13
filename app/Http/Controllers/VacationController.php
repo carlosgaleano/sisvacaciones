@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Vacation;
+use App\User;
+use App\Worker;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+
 use DateTime;
+
 
 class VacationController extends Controller
 {
@@ -34,7 +38,19 @@ class VacationController extends Controller
         } catch (DecryptException $e) {
             return redirect('/home');
         }
-        return view('vacation.create')->with('id_worker',$decrypted_id)->with('name_worker',$decrypted_name);
+       
+
+          
+        $worker=Worker::where('id','=',$decrypted_id)->first();
+
+       // dd($id_worker);
+        $datos = $worker->toArray();
+       // $vacaciones = new VacationController;   
+        $result =  $this->calcular_dias($datos['date_in']); 
+
+        return view('vacation.create')->with('id_worker',$decrypted_id)
+                                      ->with('name_worker',$decrypted_name)
+                                      ->with('dias_disponibles',$result);
     }
 
     
@@ -70,6 +86,7 @@ class VacationController extends Controller
             'reason' => 'required',
             'observations' => 'required',
             'date_init' => 'required',
+            'date_end' => 'required',
             'worker_id' => 'required',
         ]);
 
@@ -79,6 +96,7 @@ class VacationController extends Controller
         $vacation->reason = $request['reason'];
         $vacation->observations = $request['observations'];
         $vacation->date_init = date("Y-m-d", strtotime($request['date_init']));
+        $vacation->date_end = date("Y-m-d", strtotime($request['date_end']));
         $vacation->worker_id = $request['worker_id'];
 
         $vacation->save();

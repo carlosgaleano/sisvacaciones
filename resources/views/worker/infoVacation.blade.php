@@ -1,9 +1,11 @@
 @extends('layouts.app')
-{{$workers}}
+
+
+
 @section('content')
 <div class="container">
 <div class="panel panel-default">
-  <div class="panel-body">Vacaciones Fecha de Ingreso: {{$workers->date_in}} </div>
+  <div class="panel-body">Vacaciones Fecha de Ingreso: {{$worker->date_in}} </div>
   <div class="panel-footer">
 
   <table class="table">
@@ -35,7 +37,11 @@
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-body">Vacaciones Tomadas</div>
+  <div class="panel-body">Vacaciones Tomadas <span style="margin-left: 70%">
+  <a class="btn btn-success" href="{{  url('/vacation/create/'.Crypt::encrypt($worker->id).'/'.Crypt::encrypt($worker->name))}}">Solicitar Vacaciones</a>
+
+</span></div>
+
   <div class="panel-footer">
   <table class="table">
   <thead>
@@ -47,13 +53,17 @@
     </tr>
   </thead>
   <tbody>
+  @foreach ($items as $item)
+    <p>This is user {{  $item }}</p>
     <tr>
       <th scope="row"></th>
-      <td></td>
+      <td>1</td>
       <td></td>
       <td></td>
     </tr>
    
+@endforeach
+    
   </tbody>
 </table>
 
@@ -63,3 +73,12 @@
 
 </div>
 @endsection
+<script>
+  function validarperiodo(fechaInicio, fechaFin) {
+    var fechaInicio = new Date(fechaInicio);
+    var fechaFin = new Date(fechaFin);
+    var diferencia = fechaFin.getTime() - fechaInicio.getTime();
+    var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    return dias;
+  }
+</script>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\User;
 use App\Worker;
+use App\Vacation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\VacationController;
 
@@ -29,10 +30,10 @@ class WorkerController extends Controller
 
     public function create()
     {
-        $areas = Area::lists('name','id')->toArray();
-        $user = User::where('role_id',2)->lists('name', 'id')->toarray();
-        return view('worker.create')->with('areas',$areas)
-                                    ->with('user',$user);
+        $areas = Area::lists('name', 'id')->toArray();
+        $user = User::where('role_id', 2)->lists('name', 'id')->toarray();
+        return view('worker.create')->with('areas', $areas)
+            ->with('user', $user);
     }
 
     public function store(Request $request)
@@ -46,10 +47,10 @@ class WorkerController extends Controller
             'position' => 'required',
             'email' => 'required',
             'area_id' => 'required',
-            'user_id'=>'required'
+            'user_id' => 'required'
         ]);
-    
-      
+
+
         $worker = new Worker();
         $worker->name = $request['name'];
         $worker->ci = $request['ci'];
@@ -68,39 +69,42 @@ class WorkerController extends Controller
         return redirect('/home');
     }
 
-    public function upload(Request $request) {
-        if($request->file('file')) {
+    public function upload(Request $request)
+    {
+        if ($request->file('file')) {
             //upload an image to the /img/tmp directory and return the filepath.
             $file = $request->file('file');
             $tmpFilePath = '/img/tmp/';
             $tmpFileName = time() . '-' . $file->getClientOriginalName();
             $file->move(public_path() . $tmpFilePath, $tmpFileName);
             $path = $tmpFilePath . $tmpFileName;
-            return response()->json(array('path'=> $path), 200);
+            return response()->json(array('path' => $path), 200);
         } else {
             return response()->json(false, 200);
         }
     }
 
-    public function show($id){
+    public function show($id)
+    {
         try {
             $decrypted_id = \Crypt::decrypt($id);
         } catch (DecryptException $e) {
             return redirect('/home');
         }
         $worker = Worker::find($decrypted_id);
-        return view('worker.show')->with('worker',$worker);
+        return view('worker.show')->with('worker', $worker);
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         try {
             $decrypted_id = \Crypt::decrypt($id);
         } catch (DecryptException $e) {
             return redirect('/home');
         }
         $worker = Worker::find($decrypted_id);
-        $areas = Area::lists('name','id')->toArray();
-        return view('worker.edit')->with('worker',$worker)->with('areas',$areas);
+        $areas = Area::lists('name', 'id')->toArray();
+        return view('worker.edit')->with('worker', $worker)->with('areas', $areas);
     }
 
     public function update(Request $request)
@@ -131,7 +135,8 @@ class WorkerController extends Controller
         return redirect('/home');
     }
 
-    public function remove (Request $request){
+    public function remove(Request $request)
+    {
         $this->validate($request, [
             'id_worker' => 'required',
             'fecha_retiro' => 'required',
@@ -145,32 +150,46 @@ class WorkerController extends Controller
         return redirect('/home');
     }
 
-    public function retirados(){
-        $workers = Worker::where('state',0);
-        return view('worker.retirados')->with('workers',$workers->get());
+    public function retirados()
+    {
+        $workers = Worker::where('state', 0);
+        return view('worker.retirados')->with('workers', $workers->get());
     }
 
 
-    public function state(){
+    public function state()
+    {
         return 'hola';
     }
 
-    public function infoVacation(){
+    public function infoVacation()
+    {
 
-        $id=auth()->user()->id;
-        //dd( $id);
-        $worker = Worker::where('user_id','=',$id)->first();
-        $datos=$worker->toArray();
-    
-        $vacaciones= new VacationController;
-        if($datos){
-            $result=$vacaciones->calcular_dias($datos['date_in']);
-         }else{
-             $result=null;
-         }
+        $id = auth()->user()->id;
+
+        $datosUser = new \stdClass;
+        $datosUser->name = auth()->user()->name;
+        $datosUser->id = auth()->user()->id;
+
+
+
+      
+        $worker = Worker::where('user_id', '=', $id)->first();
+        $vacaciones= Vacation::where('worker_id', '=', $worker->id);
+       // $vacaciones=$vacaciones->toArray();
+       //dd($vacaciones);
+        $datos = $worker->toArray();
+
+        $vacaciones = new VacationController;
+        if ($datos) {
+            $result = $vacaciones->calcular_dias($datos['date_in']);
+        } else {
+            $result = null;
+        }
         return view('worker.infoVacation')
-              ->with('workers',$worker)
-              ->with('result',$result);
-
+            ->with('worker', $worker)
+            ->with('result', $result)
+            ->with('datosUser', $datosUser)
+            ->with('items', $vacaciones);
     }
 }
