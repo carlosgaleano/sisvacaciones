@@ -46,6 +46,8 @@
                             <li><a href="{{ url('/worker/create') }}">Registrar Empleado</a></li>
                             <li><a href="{{ url('/home') }}">Listar Empleados Activos</a></li>
                             <li><a href="{{ url('/worker/retirados') }}">Listar Empleados Retirados</a></li>
+                            <li><a href="{{ url('/vacation/vacationsPending/') }}">Aprobar Vacaciones</a></li>
+
                         </ul>
                     </li>
                     <li class="dropdown">

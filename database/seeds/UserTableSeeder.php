@@ -26,8 +26,8 @@ class UserTableSeeder extends Seeder
         ],
         [
 
-            'name' => 'carlos',
-            'username' => 'carlos',
+            'name' => 'cristoffer',
+            'username' => 'cristoffer',
             'rol' => 'normal',
             'email' => '',
             'password' => bcrypt('123456'),

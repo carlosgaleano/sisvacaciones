@@ -175,7 +175,7 @@ class WorkerController extends Controller
 
       
         $worker = Worker::where('user_id', '=', $id)->first();
-        $vacaciones= Vacation::where('worker_id', '=', $worker->id);
+        $solicitudes= Vacation::where('worker_id', '=', $worker->id)->get();
        // $vacaciones=$vacaciones->toArray();
        //dd($vacaciones);
         $datos = $worker->toArray();
@@ -190,6 +190,6 @@ class WorkerController extends Controller
             ->with('worker', $worker)
             ->with('result', $result)
             ->with('datosUser', $datosUser)
-            ->with('items', $vacaciones);
+            ->with('items', $solicitudes);
     }
 }

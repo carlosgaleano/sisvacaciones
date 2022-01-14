@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 
-
 @section('content')
 <div class="container">
 <div class="panel panel-default">
@@ -54,12 +53,12 @@
   </thead>
   <tbody>
   @foreach ($items as $item)
-    <p>This is user {{  $item }}</p>
+    
     <tr>
-      <th scope="row"></th>
-      <td>1</td>
-      <td></td>
-      <td></td>
+      <td>{{$item->date_init}}</td>
+      <td>{{$item->date_end}}</td>
+      <td>{{$item->days_taken}}</td>
+      <td>{{$item->date_in}}</td>
     </tr>
    
 @endforeach

@@ -51,6 +51,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/vacation/create/{id_worker}/{name_worker}', 'VacationController@create');
     Route::post('/vacation/store', 'VacationController@store');
+    Route::get('/vacation/vacationsPending/', 'VacationController@showSolicitudes');
 });
 
 Route::group(['middleware' => ['api']], function () {

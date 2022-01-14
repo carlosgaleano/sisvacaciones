@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;     
+use DB;      
+
 
 use DateTime;
 
@@ -102,5 +105,23 @@ class VacationController extends Controller
         $vacation->save();
 
         return redirect('/home');
+    }
+
+    public function showSolicitudes()
+    {
+        //
+        //$vacations = Vacation::where('state_id', '=', '0')->get();
+        $reporte=null;
+        $reporte =  (object)($reporte);
+        $solicitudes=DB::table('vacations')
+        ->leftJoin('workers','vacations.worker_id','=','workers.id')
+        ->leftJoin('statevacations','vacations.state_id','=','statevacations.id_state')
+        ->select('vacations.id', 'vacations.date_init', 'vacations.date_end', 'vacations.days_taken' ,'workers.name', 'statevacations.name as descricion_estado' )->get();
+        /* ->map( function ($reporte){
+            $reporte->date_init = date("d-m-Y", strtotime($reporte->date_init));
+            return $reporte;
+        }) */
+
+        return view('vacation.vacationsPending')->with('solicitudes',$solicitudes);
     }
 }
