@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Vacation;
 use App\User;
 use App\Worker;
+use App\StateVacations;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,7 +15,7 @@ use DB;
 
 
 use DateTime;
-
+use Illuminate\Support\Facades\App;
 
 class VacationController extends Controller
 {
@@ -112,7 +113,12 @@ class VacationController extends Controller
         //
         //$vacations = Vacation::where('state_id', '=', '0')->get();
         $reporte=null;
-        $reporte =  (object)($reporte);
+        //$reporte =  (object)($reporte);
+
+        //$estados= DB::table('statevacations')->get();
+
+        $estados= StateVacations::lists('name', 'id_state as id')->toarray();
+        //dd($estados);
         $solicitudes=DB::table('vacations')
         ->leftJoin('workers','vacations.worker_id','=','workers.id')
         ->leftJoin('statevacations','vacations.state_id','=','statevacations.id_state')
@@ -122,6 +128,8 @@ class VacationController extends Controller
             return $reporte;
         }) */
 
-        return view('vacation.vacationsPending')->with('solicitudes',$solicitudes);
+        return view('vacation.vacationsPending')
+        ->with('solicitudes',$solicitudes)
+        ->with('estados',$estados);
     }
 }
