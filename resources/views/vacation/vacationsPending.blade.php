@@ -54,7 +54,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Aprobación de vacaciones</h4>
             </div>
-            <form role="form" method="POST" action="{{ url('/worker/remove') }}">
+            <form role="form" method="POST" action="{{ url('/vacation/stateupdate') }}">
                 {!! csrf_field() !!}
             <div class="modal-body">
 
@@ -81,14 +81,14 @@
                    
                     <div class="form-group mt-4">
                         <label for="message-text" class="control-label">Observacion de la aprobacion:</label>
-                        <textarea class="form-control" id="message-text" name="motivo_retiro"></textarea>
+                        <textarea class="form-control" id="message-text" name="observacion_estado"></textarea>
                     </div>
                     <input type="hidden" name="id_worker" value="{{$item->id}}"/>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Retirar Trabajador</button>
+                <button type="submit" class="btn btn-primary">Mofificar Estado</button>
             </div>
             </form>
         </div><!-- /.modal-content -->

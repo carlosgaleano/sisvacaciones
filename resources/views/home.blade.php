@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{{$result}}
+
 @section('content')
 <div class="container">
     <div class="row">

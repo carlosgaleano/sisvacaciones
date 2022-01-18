@@ -132,4 +132,21 @@ class VacationController extends Controller
         ->with('solicitudes',$solicitudes)
         ->with('estados',$estados);
     }
+
+    public function  updateState(Request $request)
+    {
+
+       //dd($request);
+        $this->validate($request, [
+            'id_worker' => 'required',
+            'id_state' => 'required',
+        ]);
+
+        //$vacation = Vacation::where('worker_id','=',$request['id_worker']);
+        $vacation = Vacation::find($request['id_worker']);
+        $vacation->state_id = $request['id_state'];
+        $vacation->save();
+
+        return redirect('/vacation/vacationsPending');
+    }
 }
