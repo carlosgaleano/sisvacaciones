@@ -14,9 +14,9 @@ class CreateStateVacations extends Migration
     {
         Schema::create('statevacations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_state');
             $table->string('name');
             $table->timestamps();
+           
         });
     }
 

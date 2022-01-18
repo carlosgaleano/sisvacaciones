@@ -22,11 +22,11 @@
     </tr>
     <tr>
       <th scope="row">(-) Tomadas</th>
-      <td>0</td>
+      <td>{{$vacationTaken=MyHelper::vacationTaken($worker->id)}}</td>
     </tr>
     <tr>
       <th scope="row">(=) Totales</th>
-      <td>{{$result}}</td>
+      <td>{{$result -$vacationTaken}}</td>
     </tr>
    
   </tbody>
@@ -58,7 +58,7 @@
       <td>{{$item->date_init}}</td>
       <td>{{$item->date_end}}</td>
       <td>{{$item->days_taken}}</td>
-      <td>{{$item->date_in}}</td>
+      <td>{{$item->descricion_estado}}</td>
     </tr>
    
 @endforeach

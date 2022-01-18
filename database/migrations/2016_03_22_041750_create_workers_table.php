@@ -22,13 +22,14 @@ class CreateWorkersTable extends Migration
             $table->date('date_out');
             $table->string('position');
             $table->string('email')->unique();
-            $table->smallInteger('state')->default('0');
+            $table->integer('state')->default('0');
             $table->text('reason_retirement')->nullable();
             $table->timestamps();
             $table->integer('area_id')->unsigned();
             $table->foreign('area_id')->references('id')->on('areas');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+           
         });
     }
 

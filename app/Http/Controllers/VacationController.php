@@ -102,6 +102,7 @@ class VacationController extends Controller
         $vacation->date_init = date("Y-m-d", strtotime($request['date_init']));
         $vacation->date_end = date("Y-m-d", strtotime($request['date_end']));
         $vacation->worker_id = $request['worker_id'];
+        $vacation->state_id = 1;
 
         $vacation->save();
 
@@ -117,11 +118,11 @@ class VacationController extends Controller
 
         //$estados= DB::table('statevacations')->get();
 
-        $estados= StateVacations::lists('name', 'id_state as id')->toarray();
+        $estados= StateVacations::lists('name', 'id')->toarray();
         //dd($estados);
         $solicitudes=DB::table('vacations')
         ->leftJoin('workers','vacations.worker_id','=','workers.id')
-        ->leftJoin('statevacations','vacations.state_id','=','statevacations.id_state')
+        ->leftJoin('statevacations','vacations.state_id','=','statevacations.id')
         ->select('vacations.id', 'vacations.date_init', 'vacations.date_end', 'vacations.days_taken' ,'workers.name', 'statevacations.name as descricion_estado' )->get();
         /* ->map( function ($reporte){
             $reporte->date_init = date("d-m-Y", strtotime($reporte->date_init));

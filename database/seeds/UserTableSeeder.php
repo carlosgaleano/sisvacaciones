@@ -14,7 +14,7 @@ class UserTableSeeder extends Seeder
     {
         //factory(App\User::class,2)->create();
 
-        DB::table('users')->insert([
+      /*   DB::table('users')->insert([
            [
             'name' => 'admin',
             'username' => 'admin',
@@ -29,15 +29,21 @@ class UserTableSeeder extends Seeder
             'name' => 'cristoffer',
             'username' => 'cristoffer',
             'rol' => 'normal',
-            'email' => '',
+            'email' => 'cristoffer@gmail.com',
             'password' => bcrypt('123456'),
             'api_token' => str_random(60),
             'role_id' => 2,
         ]
 
-    ]);
+    ]); */
+
+
+    factory(App\User::class,10)->create();
+    //factory(App\Worker::class,10)->create();
         
-        ;
+
+  
+    
 
            
     }

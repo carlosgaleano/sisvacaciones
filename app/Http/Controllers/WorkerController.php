@@ -8,6 +8,7 @@ use App\Worker;
 use App\Vacation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\VacationController;
+use DB;  
 
 use App\Http\Requests;
 
@@ -175,10 +176,18 @@ class WorkerController extends Controller
 
       
         $worker = Worker::where('user_id', '=', $id)->first();
-        $solicitudes= Vacation::where('worker_id', '=', $worker->id)->get();
+        //$solicitudes= Vacation::where('worker_id', '=', $worker->id)->get();
        // $vacaciones=$vacaciones->toArray();
-       //dd($vacaciones);
+       //dd( $solicitudes);
+
+      //dd($solicitudes) ;
+       $solicitudes= Vacation::leftJoin('workers','vacations.worker_id','=','workers.id')
+       ->leftJoin('statevacations','vacations.state_id','=','statevacations.id')
+       ->where('worker_id', '=', $worker->id)
+       ->select('vacations.id', 'vacations.date_init', 'vacations.date_end', 'vacations.days_taken' ,'workers.name', 'statevacations.name as descricion_estado' )->get();
         $datos = $worker->toArray();
+
+       // dd( $solicitudes);
 
         $vacaciones = new VacationController;
         if ($datos) {
