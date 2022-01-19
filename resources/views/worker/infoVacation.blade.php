@@ -3,7 +3,12 @@
 
 @section('content')
 <div class="container">
+
+@if($worker)
+
+
 <div class="panel panel-default">
+
   <div class="panel-body">Vacaciones Fecha de Ingreso: {{$worker->date_in}} </div>
   <div class="panel-footer">
 
@@ -52,6 +57,7 @@
     </tr>
   </thead>
   <tbody>
+  @if($items)
   @foreach ($items as $item)
     
     <tr>
@@ -62,6 +68,7 @@
     </tr>
    
 @endforeach
+@endif
     
   </tbody>
 </table>
@@ -70,6 +77,14 @@
   </div>
 </div>
 
+@else
+<div class="panel panel-default">
+  <div class ="panel-body info">
+ <span class="info">El Usuario no tiene un trabajador associado </span>   
+  </div>
+  <div class=""></div>
+
+@endif
 </div>
 @endsection
 <script>
@@ -81,3 +96,11 @@
     return dias;
   }
 </script>
+<style>
+  
+  .info{
+text-align: center;
+color: midnightblue;
+font-size: 20px;
+  }
+</style>

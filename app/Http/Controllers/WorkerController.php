@@ -173,7 +173,7 @@ class WorkerController extends Controller
         $datosUser->id = auth()->user()->id;
 
 
-
+        
       
         $worker = Worker::where('user_id', '=', $id)->first();
         //$solicitudes= Vacation::where('worker_id', '=', $worker->id)->get();
@@ -181,11 +181,21 @@ class WorkerController extends Controller
        //dd( $solicitudes);
 
       //dd($solicitudes) ;
-       $solicitudes= Vacation::leftJoin('workers','vacations.worker_id','=','workers.id')
+      if($worker){
+
+        $solicitudes= Vacation::leftJoin('workers','vacations.worker_id','=','workers.id')
        ->leftJoin('statevacations','vacations.state_id','=','statevacations.id')
        ->where('worker_id', '=', $worker->id)
        ->select('vacations.id', 'vacations.date_init', 'vacations.date_end', 'vacations.days_taken' ,'workers.name', 'statevacations.name as descricion_estado' )->get();
-        $datos = $worker->toArray();
+
+       $datos = $worker->toArray();
+
+      }else{
+        $solicitudes=null;
+        $datos=null;
+      }
+       
+      //  $datos = $worker->toArray();
 
        // dd( $solicitudes);
 

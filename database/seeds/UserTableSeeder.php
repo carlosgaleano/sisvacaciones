@@ -38,12 +38,14 @@ class UserTableSeeder extends Seeder
     ]); */
 
 
-    factory(App\User::class,10)->create();
-    //factory(App\Worker::class,10)->create();
-        
+    //factory(App\User::class,10)->create();
 
+    $i=10;
+    for ($i=0; $i < 10; $i++) { 
+        factory(App\Worker::class,1)->create();
+
+        } 
   
-    
 
            
     }

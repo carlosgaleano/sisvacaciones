@@ -8,6 +8,9 @@
 
 namespace App\Helpers;
 use App\Vacation;
+use App\Worker;
+use App\StateVacations;
+use App\User;
 
 class MyHelper {
     public static function vacationDays($date){
@@ -33,5 +36,16 @@ class MyHelper {
 
     public static function stateWorker($state){
         return ($state == 1)? 'ACTIVO' : 'RETIRADO';
+    }
+
+
+    public static function getIdUser(){
+
+        $datos=User::select('id', 'name')
+            ->whereNotIn('id', Worker::select('user_id as id')->get()->toArray())
+            ->where('rol', '!=', 'admin')
+            ->orderBy('id', 'ASC')
+            ->first()->toArray();
+        return $datos['id'];
     }
 } 
