@@ -35,11 +35,11 @@
                             {!! csrf_field() !!}
                             <div class="col-md-6 col-md-offset-4 {{ $errors->has('photo') ? ' has-error' : '' }}">
                                 <input type="hidden" id="path-photo" name="photo" value=""/>
-                                @if ($errors->has('photo'))
+                             <!--    @if ($errors->has('photo'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('photo') }}</strong>
                                     </span>
-                                @endif
+                                @endif -->
                             </div>
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -57,7 +57,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('ci') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">CI:</label>
+                                <label class="col-md-4 control-label">Rut:</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="ci" value="{{ old('ci') }}">
@@ -175,7 +175,7 @@
 </div>
 @endsection
 @section('style')
-{!! Html::style('css/bootstrap-datetimepicker.min.css') !!}
+{!! Html::style('css/bootstrap-datepicker3.css') !!}
 {!! Html::style('css/dropzone.min.css') !!}
 <style>
     .dropzone .dz-preview{
@@ -194,13 +194,20 @@
 @endsection
 @section('javascript')
 {!! Html::script('js/moment.min.js') !!}
+{!! Html::script('js/bootstrap-datepicker.min1.6.js') !!}
 {!! Html::script('js/bootstrap-datetimepicker.min.js') !!}
+{!! Html::script('js/bootstrap-datepicker.es.min.js') !!}
 {!! Html::script('js/dropzone.min.js') !!}
 <script type="text/javascript">
     $(function () {
-        $('#date-in').datetimepicker({
-            format: 'DD-MM-YYYY'
+        $('#date-in').datepicker({
+           
+           // format: 'DD-MM-YYYY',
+           format: 'dd-mm-yyyy',
+            language: 'es'
+        
         });
+        //$.datetimepicker.setDefaults($.datepicker.regional['es']);
         Dropzone.options.myDropzone = {
             uploadMultiple: false,
             // previewTemplate: '',

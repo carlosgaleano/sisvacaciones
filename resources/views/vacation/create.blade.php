@@ -105,9 +105,11 @@
 </div>
 @endsection
 @section('style')
-{!! Html::style('css/bootstrap-datetimepicker.min.css') !!}
+{!! Html::style('css/bootstrap-datepicker3.css') !!}
 @endsection
 @section('javascript')
+{!! Html::script('js/bootstrap-datepicker.min1.6.js') !!}
+{!! Html::script('js/bootstrap-datepicker.es.min.js') !!}
 {!! Html::script('js/moment.min.js') !!}
 {!! Html::script('js/bootstrap-datetimepicker.min.js') !!}
 <script>
@@ -117,11 +119,13 @@
 
     });
 
-    $('#date-init').datetimepicker({
-        format: 'DD-MM-YYYY'
+    $('#date-init').datepicker({
+        format: 'dd-mm-yyyy',
+            language: 'es'
     });
-    $('#date-end').datetimepicker({
-        format: 'DD-MM-YYYY'
+    $('#date-end').datepicker({
+        format: 'dd-mm-yyyy',
+            language: 'es'
     });
 
     function validarfechas(){

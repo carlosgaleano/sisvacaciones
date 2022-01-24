@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
 <div class="container">
 
@@ -16,6 +15,7 @@
   <thead>
     <tr>
       <th scope="col">id</th>
+      <th>Nombre</th>
       <th scope="col">inicio</th>
       <th scope="col">fin</th>
       <th scope="col">dias</th>
@@ -28,6 +28,7 @@
     
     <tr>
       <td>{{$item->id}}</td>
+      <td>{{$item->name}}</td>
       <td>{{date('d m Y', strtotime($item->date_init))}}</td>
       <td>{{date('d m Y', strtotime($item->date_end))}}</td>
       <td>{{$item->days_taken}}</td>
@@ -39,7 +40,7 @@
                                             <i class="fa fa-bars"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                           <li><a href="#" data-toggle="modal" data-target="#modalWorker">Aprobar Vacaciones</a></li>
+                                           <li><a href="#" data-toggle="modal" data-target="#modalWorker{{$item->id}}">Aprobar Vacaciones</a></li>
 <!--                                            <li><a href="{{ url('/worker/show/'.Crypt::encrypt($item->id)) }}">Informacion de {{$item->id}}</a></li>
  -->                                        </ul>
                                     </div>
@@ -47,7 +48,7 @@
 
     </tr>
    
-    <div class="modal fade" tabindex="-1" role="dialog" id="modalWorker">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalWorker{{$item->id}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -58,10 +59,14 @@
                 {!! csrf_field() !!}
             <div class="modal-body">
 
-                          
+        <!--     <div class="form-group">
+                <label for="id_w">Id</label>
+                <input type="text" class="form-control" id="id_w" name="id_w" value="{{$item->id}}">
+            </div>  -->   
                     <div class="form-group">
                     <label class="col-md-2 control-label">Accion:</label>
-                   
+
+                    
 
                       <div class="col-md-10">
                           {!! Form::select('id_state',['' => 'Seleccione un Usuario...']+$estados,null, array('class' => 'form-control')) !!}

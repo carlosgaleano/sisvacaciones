@@ -150,7 +150,8 @@
 </div>
 @endsection
 @section('style')
-{!! Html::style('css/bootstrap-datetimepicker.min.css') !!}
+{!! Html::style('css/bootstrap-datepicker3.css') !!}
+
 {!! Html::style('css/dropzone.min.css') !!}
 <style>
     .dropzone .dz-preview{
@@ -170,11 +171,14 @@
 @section('javascript')
 {!! Html::script('js/moment.min.js') !!}
 {!! Html::script('js/bootstrap-datetimepicker.min.js') !!}
+{!! Html::script('js/bootstrap-datepicker.min1.6.js') !!}
+{!! Html::script('js/bootstrap-datepicker.es.min.js') !!}
 {!! Html::script('js/dropzone.min.js') !!}
 <script type="text/javascript">
     $(function () {
-        $('#date-in').datetimepicker({
-            format: 'DD-MM-YYYY'
+        $('#date-in').datepicker({
+            format: 'dd-mm-yyyy',
+            language: 'es'
         });
 
         //var myDropzone = new Dropzone("#my-dropzone");

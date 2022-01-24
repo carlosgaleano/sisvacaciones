@@ -29,7 +29,7 @@
                                 <th>Fecha Entrada</th>
                                 <th>Area</th>
                                 <th>Puesto</th>
-                                <th class="success">Ganados</th>
+                               <!--  <th class="success">Ganados</th> -->
                                 <th class="success">Acumulados</th>
                                 <th class="success">Tomados</th>
                                 <th class="success">Restantes</th>
@@ -45,10 +45,10 @@
                                 <td>{{$worker->date_in}}</td>
                                 <td>{{$worker->area->name}}</td>
                                 <td>{{$worker->position}}</td>
-                                <td class="success">{{$vacationDays=MyHelper::vacationDays($worker->date_in)}}</td>
+                                <!-- <td class="success">{{$vacationDays=MyHelper::vacationDays($worker->date_in)}}</td> -->
                                 <td class="success">{{$result}}</td>
                                 <td class="success">{{$vacationTaken=MyHelper::vacationTaken($worker->id)}}</td>
-                                <td class="success">{{$vacationDays-$vacationTaken}}</td>
+                                <td class="success">{{$result-$vacationTaken}}</td>
                                 <td>
                                     <!-- Single button -->
                                     <div class="btn-group">

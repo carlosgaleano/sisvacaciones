@@ -14,7 +14,7 @@ class UserTableSeeder extends Seeder
     {
         //factory(App\User::class,2)->create();
 
-      /*   DB::table('users')->insert([
+        DB::table('users')->insert([
            [
             'name' => 'admin',
             'username' => 'admin',
@@ -35,10 +35,10 @@ class UserTableSeeder extends Seeder
             'role_id' => 2,
         ]
 
-    ]); */
+    ]);
 
 
-    //factory(App\User::class,10)->create();
+    factory(App\User::class,10)->create();
 
     $i=10;
     for ($i=0; $i < 10; $i++) { 

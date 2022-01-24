@@ -65,7 +65,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Solicitud de Vacaciones <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                            
-                            <li><a href="{{ url('/home') }}">Listar Empleados Activos</a></li>
+                            <li><a href="{{ url('/home') }}">Gestione sus Vacaciones</a></li>
                           
                         </ul>
                     </li>
@@ -97,6 +97,7 @@
     <!-- JavaScripts -->
     {!! Html::script('js/jquery.min.js') !!}
     {!! Html::script('js/bootstrap.min.js') !!}
+    
     @yield('javascript')
 </body>
 </html>

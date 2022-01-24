@@ -39,6 +39,7 @@ class WorkerController extends Controller
 
     public function store(Request $request)
     {
+       
         $this->validate($request, [
             'name' => 'required',
             'ci' => 'required',
@@ -110,6 +111,8 @@ class WorkerController extends Controller
 
     public function update(Request $request)
     {
+
+     
         $this->validate($request, [
             'name' => 'required',
             'ci' => 'required',

@@ -26,6 +26,7 @@ class AreaController extends Controller
         return view('area.index')->with('areas',$areas);
     }
 
+    
     public function create()
     {
         return view('area.create');

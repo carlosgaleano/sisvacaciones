@@ -52,6 +52,7 @@ $factory->define(App\Worker::class, function (Faker\Generator $faker, $datos) {
         'date_in'=> $faker->dateTimeBetween('-3 years', '-1 years'),
         'area_id' => $faker->numberBetween(1,10),
         'user_id' => MyHelper::getIdUser(),
+        'state'=>1,
      /*    'date_in' => $faker->date_in,,
         'date_out' => $faker->date_out,
         'area_id' => $faker->area_id,

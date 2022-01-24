@@ -137,7 +137,7 @@ class VacationController extends Controller
     public function  updateState(Request $request)
     {
 
-       //dd($request);
+      // dd($request);
         $this->validate($request, [
             'id_worker' => 'required',
             'id_state' => 'required',
