@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+
 class AuthController extends Controller
 {
     /*
@@ -42,7 +43,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => ['logout','showRegisterForm','register']]);
+       $this->middleware($this->guestMiddleware(), ['except' => ['logout','showRegisterForm','register','listUser','create']]);
     }
 
     /**
@@ -54,6 +55,7 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'username' => 'required|max:255',
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
@@ -70,21 +72,34 @@ class AuthController extends Controller
     protected function create(array $data)
     {
 
-
-      
+       // dd( $data);
+      //$this->validator( $data);
         $id_role=$data['rol']=='admin'?1:2;
 
        //dd($id_role);
-        return User::create([
+       return  User::create([
+            'username'=>$data['username'],
             'name' => $data['name'],
             'email' => $data['email'],
             'rol' =>$data['rol'],
             'role_id' =>$id_role,
             'password' => bcrypt($data['password']),
+            'api_token' => str_random(50),
+            'remember_token' => str_random(10),
            
         ]);
+
+         // $this->listUser();
     }
 
+    public function listUser(){
+
+        $usuarios=User::all();
+
+        return view('auth.lista')
+                ->with('usuarios',$usuarios);
+
+    }
     public function showRegisterForm(){
 
         return view('auth.register');

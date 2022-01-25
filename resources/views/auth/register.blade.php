@@ -5,13 +5,29 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+                <div class="panel-heading">Registro de usuarios</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/registerUser') }}">
                         {!! csrf_field() !!}
 
+                        
+
+                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Nombre de Usuario</label>
+
+                            <div class="col-md-6">
+                                <input type="text" id="username" class="form-control" name="username" value="{{ old('username') }}">
+
+                                @if ($errors->has('username'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('username') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Name</label>
+                            <label class="col-md-4 control-label">Nombres</label>
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">
@@ -53,7 +69,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Confirm Password</label>
+                            <label class="col-md-4 control-label">confirmar Password</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password_confirmation">
@@ -65,11 +81,11 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Role</label>
+                        <div class="form-group{{ $errors->has('rol') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Rol</label>
                             <div class="col-md-6">
                                 <select name="rol" class="form-control" id="rol" {{ $errors->has('role') ? ' has-error' : '' }}>
-                                    <option value="">Select Role</option>
+                                    <option value="">Select Rol</option>
                                     <option value="admin">admin</option>
                                     <option value="normal">Empleado</option>
                                 </select>

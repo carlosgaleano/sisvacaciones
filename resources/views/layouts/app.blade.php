@@ -32,7 +32,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Sistema de Vacaciones
+                    Sistema  FexVac
                 </a>
             </div>
 
@@ -58,6 +58,13 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{ url('/area/create') }}">Crear Area</a></li>
                             <li><a href="{{ url('/area') }}">Listar Areas</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios del Sistema <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                        <li><a href="{{ url('/register') }}"><i class="fas fa-user-tie"></i>Registrar Usuario</a></li>
+                            <li><a href="{{ url('/listaUsuarios') }}"><i class="fa fa-btn fas fa-users">  </i>  Listar Usuarios</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -87,7 +94,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ url('/register') }}"><i class="fa fa-btn fa-sign-out"></i>Registrar Usuario</a></li>
+                        
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                         </ul>
                     </li>
