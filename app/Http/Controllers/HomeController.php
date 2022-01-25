@@ -55,6 +55,10 @@ class HomeController extends Controller
       }
         
     }
+    public function showRegisterForm(){
+
+        return view('auth.register');
+    }
 
     public function welcome(){
         if (\Auth::check()) {

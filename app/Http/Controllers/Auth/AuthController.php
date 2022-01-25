@@ -42,7 +42,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => ['logout','showRegisterForm','register']]);
     }
 
     /**
@@ -57,6 +57,7 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'rol' =>'required',
         ]);
     }
 
@@ -68,11 +69,25 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+
+
+      
+        $id_role=$data['rol']=='admin'?1:2;
+
+       //dd($id_role);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'rol' =>$data['rol'],
+            'role_id' =>$id_role,
             'password' => bcrypt($data['password']),
+           
         ]);
+    }
+
+    public function showRegisterForm(){
+
+        return view('auth.register');
     }
 
     public function showLoginForm()

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +16,7 @@
     {!! Html::style('css/app.css') !!}
     @yield('style')
 </head>
+
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
@@ -43,6 +45,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Empleados <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                       
                             <li><a href="{{ url('/worker/create') }}">Registrar Empleado</a></li>
                             <li><a href="{{ url('/home') }}">Listar Empleados Activos</a></li>
                             <li><a href="{{ url('/worker/retirados') }}">Listar Empleados Retirados</a></li>
@@ -64,12 +67,13 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Solicitud de Vacaciones <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                           
+
                             <li><a href="{{ url('/home') }}">Gestione sus Vacaciones</a></li>
-                          
+
                         </ul>
                     </li>
                   
+
                 </ul>
 
                 @endif
@@ -77,15 +81,16 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (!Auth::guest())
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
 
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                            </ul>
-                        </li>
+                        <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ url('/register') }}"><i class="fa fa-btn fa-sign-out"></i>Registrar Usuario</a></li>
+                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                        </ul>
+                    </li>
                     @endif
                 </ul>
             </div>
@@ -97,7 +102,8 @@
     <!-- JavaScripts -->
     {!! Html::script('js/jquery.min.js') !!}
     {!! Html::script('js/bootstrap.min.js') !!}
-    
+
     @yield('javascript')
 </body>
+
 </html>

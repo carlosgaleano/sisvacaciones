@@ -30,6 +30,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::get('/', 'HomeController@welcome');
     Route::get('/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@showLoginForm']);
+    Route::post('/registerUser', 'Auth\AuthController@create');
+    
+    Route::get('/register', 'Auth\AuthController@showRegisterForm');
+
     Route::get('/home', 'HomeController@index');
 
 
@@ -55,6 +59,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/vacation/vacationsPending/', 'VacationController@showSolicitudes');//updateState
 });
 
-Route::group(['middleware' => ['api']], function () {
+    Route::group(['middleware' => ['api']], function () {
     Route::post('worker/state', 'ApiController@state');
 });
