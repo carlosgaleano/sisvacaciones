@@ -45,10 +45,10 @@
                                 <td>{{$worker->date_in}}</td>
                                 <td>{{$worker->area->name}}</td>
                                 <td>{{$worker->position}}</td>
-                                <!-- <td class="success">{{$vacationDays=MyHelper::vacationDays($worker->date_in)}}</td> -->
-                                <td class="success">{{$result}}</td>
-                                <td class="success">{{$vacationTaken=MyHelper::vacationTaken($worker->id)}}</td>
-                                <td class="success">{{$result-$vacationTaken}}</td>
+                                 <td class="success">{{$vacationDays=MyHelper::vacationDays2($worker->date_in)}}</td> 
+<!--                                 <td class="success">{{$result}}</td>
+ -->                                <td class="success">{{$vacationTaken=MyHelper::vacationTaken($worker->id)}}</td>
+                                <td class="success">{{$vacationDays-$vacationTaken}}</td>
                                 <td>
                                     <!-- Single button -->
                                     <div class="btn-group">

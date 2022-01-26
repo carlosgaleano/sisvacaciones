@@ -11,6 +11,7 @@ use App\Vacation;
 use App\Worker;
 use App\StateVacations;
 use App\User;
+use DateTime;
 
 class MyHelper {
     public static function vacationDays($date){
@@ -27,6 +28,24 @@ class MyHelper {
             $vacation_days = 75+100+($year_difference-10)*30;
         }
         return $vacation_days;
+    }
+
+    public static function vacationDays2($inicio){
+        $fin=date('Y-m-d H:i:s');
+         
+        $datetime1=new DateTime($inicio);
+        $datetime2=new DateTime($fin);
+         
+        # obtenemos la diferencia entre las dos fechas
+        $interval=$datetime2->diff($datetime1);
+         
+        # obtenemos la diferencia en meses
+        $intervalMeses=$interval->format("%m");
+        # obtenemos la diferencia en años y la multiplicamos por 12 para tener los meses
+        $intervalAnos = $interval->format("%y")*12;
+        
+        $dias=($intervalMeses+$intervalAnos)*1.25;
+        return $dias;
     }
 
     public static function vacationTaken($id){
